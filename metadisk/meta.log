@@ -1,0 +1,108 @@
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdftex 2014.8.5)  5 AUG 2014 23:09
+entering extended mode
+**C:/Users/Ryan/Desktop/storj/meta.bib
+(C:/Users/Ryan/Desktop/storj/meta.bib
+Overfull \hbox (2.4683pt too wide) in paragraph at lines 2--8
+[]\tenrm @manual1, ti-tle = "Dis-tributed Plat-form, Maid-Safe", au-thor = "Mai
+d-Safe", url = "http://maidsafe.net",|
+
+\hbox(7.5+2.5)x469.75499, glue set - 1.0
+.\hbox(0.0+0.0)x20.0
+.\tenrm @
+.\tenrm m
+.\tenrm a
+.\tenrm n
+.etc.
+
+
+Overfull \hbox (87.88393pt too wide) in paragraph at lines 15--26
+\tenrm cle4, ti-tle = "Bit-coin: A Peer-to-Peer Elec-tronic Cash Sys-tem", au-t
+hor = S. Nakamoto", note = "https://bitcoin.org/bitcoin.pdf",|
+
+\hbox(7.5+2.5)x469.75499, glue set - 1.0
+.\tenrm c
+.\tenrm l
+.\tenrm e
+.\tenrm 4
+.\tenrm ,
+.etc.
+
+
+Overfull \hbox (126.49614pt too wide) in paragraph at lines 27--32
+[]\tenrm @manual5, ti-tle = "Plow-share - Down-load and up-load files from file
+ shar-ing web-sites", url = "https://code.google.com/p/plowshare/",|
+
+\hbox(7.5+2.5)x469.75499, glue set - 1.0
+.\hbox(0.0+0.0)x20.0
+.\tenrm @
+.\tenrm m
+.\tenrm a
+.\tenrm n
+.etc.
+
+
+Overfull \hbox (36.80145pt too wide) in paragraph at lines 57--62
+[]\tenrm @manual10, ti-tle = "Un-metered Ded-i-cated Servers", url = " https://
+hivelocity.net/dedicated-servers/unmetered-|
+
+\hbox(7.5+2.5)x469.75499, glue set - 1.0
+.\hbox(0.0+0.0)x20.0
+.\tenrm @
+.\tenrm m
+.\tenrm a
+.\tenrm n
+.etc.
+
+
+Overfull \hbox (30.41273pt too wide) in paragraph at lines 64--69
+[]\tenrm @manual11, ti-tle = "Down-load Speed by Coun-try", url = "http://www.n
+etindex.com/download/allcountries/",|
+
+\hbox(7.5+2.5)x469.75499, glue set - 1.0
+.\hbox(0.0+0.0)x20.0
+.\tenrm @
+.\tenrm m
+.\tenrm a
+.\tenrm n
+.etc.
+
+Missing character: There is no â in font cmr10!
+Missing character: There is no € in font cmr10!
+Missing character: There is no ™ in font cmr10!
+
+Overfull \hbox (109.60747pt too wide) in paragraph at lines 89--94
+[]\tenrm @manual15, ti-tle = "No-taryChains", url = "https://github.com/NotaryC
+hains/NotaryChainDocs/blob/master/whitepaper.md",|
+
+\hbox(7.5+2.5)x469.75499, glue set - 1.0
+.\hbox(0.0+0.0)x20.0
+.\tenrm @
+.\tenrm m
+.\tenrm a
+.\tenrm n
+.etc.
+
+
+Overfull \hbox (8.19037pt too wide) in paragraph at lines 95--100
+[]\tenrm @manual16, ti-tle = "Nielsen's Law of In-ter-net Band-width", url = "h
+ttp://www.nngroup.com/articles/law-|
+
+\hbox(7.5+2.5)x469.75499, glue set - 1.0
+.\hbox(0.0+0.0)x20.0
+.\tenrm @
+.\tenrm m
+.\tenrm a
+.\tenrm n
+.etc.
+
+Missing character: There is no â in font cmr10!
+Missing character: There is no € in font cmr10!
+Missing character: There is no ™ in font cmr10!
+)
+*
+! Emergency stop.
+<*> C:/Users/Ryan/Desktop/storj/meta.bib
+                                        
+End of file on the terminal!
+
+!  ==> Fatal error occurred, no output PDF file produced!
