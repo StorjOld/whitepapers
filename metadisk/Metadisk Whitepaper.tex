@@ -2,9 +2,12 @@
 \usepackage{url}
 \usepackage{graphicx}
 \usepackage[english]{babel}
+\usepackage{listings}
 \DeclareGraphicsExtensions{.pdf,.png,.jpg}
 \begin{document}
-
+\lstset{basicstyle=\ttfamily\footnotesize,breaklines=true}
+\lstset{numbers=left, numberstyle=\tiny, stepnumber=1, numbersep=5pt}
+\lstset{language=TeX}
 
 
 \title{\large \bf Metadisk:  Blockchain-Based Decentralized File Storage Application}
@@ -118,16 +121,18 @@ Datacoin \cite{12} is a cryptocurrency whose blockchain is a metadata store for 
 
 Storing the files themselves on the blockchain simply is not possible because of blockchain bloat. We remedy this issue by instead only storing a small amount of metadata information about each file on the blockchain. This is done by sending a simple transaction, with the metadata included. We can store its hash, file location, and any other information that we deem essential. For privacy and security reasons we can encrypt this metadata before we insert it into the blockchain. A sample of this metadata might look something like this:\\
 
-\{\\
-\indent\indent version: "0.1",\\
-\indent\indent datetime: "1391212800",\\
-\indent\indent filesize: "23124",\\
-\indent\indent file\_hash: ``6e163442e29ec8d7538bc86fe2c4a48778e8ae2254632f0889da753b1c357b1b'', \\
-\indent\indent  "uploads": [\\
-\indent\indent \{ "host\_name":"mediafire" , ``url":"http://www.mediafire.com/?qorncpzfe74s9"\},\\ 
-\indent\indent\{ "host\_name":"rapidshare" , ``url":"http://rapidshare.com/files/130403982"\}\\
-\indent\indent]\\
-\indent\}\\
+\begin{lstlisting}
+{
+  version: "0.1",
+  datetime: "1391212800",
+  filesize: "23124",
+  file_hash: "6e163442e29ec8d7538bc86fe2c4a48778e8ae2254632f0889da753b1c357b1b",
+   "uploads": [
+  { "host\_name":"mediafire" , "url":"http://www.mediafire.com/?qorncpzfe74s9"},
+  { "host\_name":"rapidshare" , "url":"http://rapidshare.com/files/130403982"}
+  ]
+}
+\end{lstlisting}
 
 This sample metadata, regardless of uploaded file size, takes up about 330 bytes of information. We add this to the average transaction, around 500 bytes \cite{13}. Adding some extra padding we get about 1 KB per transaction. In that case, we could store ~1 million files before the metadata in our blockchain reached 1GB in size. By further refinements we can further minimize the amount of necessary metadata information, using multiple chains, blockchain pruning, and compression,and thereby greatly increase those numbers.	
 
