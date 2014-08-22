@@ -6,6 +6,7 @@
 \usepackage{listings}
 \usepackage[labelfont=it,textfont={it},singlelinecheck=on,justification=centering]{caption}
 \usepackage{amsmath}
+\usepackage{float}
 \DeclareGraphicsExtensions{.pdf,.png,.jpg}
 \begin{document}
 \lstset{basicstyle=\ttfamily\footnotesize,breaklines=true}
@@ -35,7 +36,7 @@ We convergently encrypt chunks while also allowing users to optionally add salt,
 For a public file, the client can simply use the standard convergent encryption, and share the hash and decryption keys with the relevant parties. For private files, the client should add salt, which will protect the client even if an eavesdropper is listening over the data line, and the eavesdropper knows exactly what file it is looking for. Thanks to these methods, we can choose to transmit the files to the network over either secured or unsecured data lines.
 
 %insert Figure 1
-\begin{figure}[h]
+\begin{figure}[h!]
 \centering
 \includegraphics[width=\linewidth]{1}
 \caption{Visualizing the Chunking Process}
@@ -70,7 +71,7 @@ Data is inserted into the blockchain via a standard transaction with extra metad
 Traditional cloud storage companies own or lease servers to store their customers’ files. They use RAID schemes or a multi-datacenter approach to protect the file from physical or network failure. Storj has no physical servers - the files only exist on the distributed and decentralized network. Because of this, we must account for redundancy on the network rather than physically. We must also provide a solution to the predictable issue of farmers simply turning off their computers, removing the availability of a chunk from the network. \\
 
 %insert Figure 4
-\begin{figure}[!h]
+\begin{figure}[h!]
 \centering
 \includegraphics[width=\linewidth]{4}
 \caption{Visualizing Heartbeats}
