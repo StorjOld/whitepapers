@@ -285,7 +285,7 @@ Code:
 def fac(n): return 1 if n==0 else n * fac(n-1)
 def choose(n,k): return fac(n) / fac(k) / fac(n-k) 
 def prob(n,k,p): return choose(n,k) * p ** k * (1-p) ** (n-k)
-def prob_fail(n,k,p): sum([prob(n, i, p) for i in range(0, k)])
+def prob_fail(n,k,p): return sum([prob(n, i, p) for i in range(0, k)])
 \end{lstlisting}
 Therefore, with sufficient parameters for erasure encoding, in addition to recovery methods described in above, the statistical chance of chunk or file lost is quite small. 
 
