@@ -42,7 +42,7 @@ We identify a shard as an encrypted portion of a file that we would like to stor
 \end{figure}
 
 \begin{enumerate}
-\item File is split into some standard byte-multiple like 32 MB, or multiple smaller files are combined to form a shard. Any extra space is zero filled..
+\item File is split into some standard byte-multiple like 32 MB, or multiple smaller files are combined to form a shard. Any extra space is zero filled.
 \item Each shard is encrypted convergently or with a user defined method such as with an external encryption key.
 \item The shards may be directly transmitted to the network. Shards may be further modified, depending on the file-auditing mechanism.
 \end{enumerate}
@@ -53,7 +53,7 @@ If necessary, multiple shards can be combined together. This is useful in two si
 
 \section{Proof-of-Storage}
 
-Another concern is the integrity and availability of a shard stored on the network. A Farmer must be able to prove cryptographically that it has the shard, and has not modified it in any way. We accomplish this via the methods discussed below.
+Another concern is the integrity and availability of a shard stored on the network. A farmer must be able to prove cryptographically that it has the shard, and has not modified it in any way. We accomplish this via the methods discussed below.
 \subsection{Proof-of-Storage via Merkle Audits}
 
 To implement a trustless data storage network, we must provide a method for a client to audit that the data he or she has stored on the network is available and unmodified. We do this through the use of Merkle trees \cite{2} and Merkle proofs. We take a collection of data and generate a Merkle tree as shown in Figure 2:\\
@@ -65,7 +65,8 @@ To implement a trustless data storage network, we must provide a method for a cl
 \caption{Generating a Data Merkle Tree}
 \end{figure}
 
- The leaves of the tree should be 256-byte shards or smaller. Ideally the tree should be larger than the data, so the tree should be generated on the fly instead of stored. An audit of the data on a remote location simply consists of a particular index and a response consisting of the sub-shard located at that index plus a Merkle tree SPV proof. This algorithm has been further described in “Secret Sharing and Erasure Coding: A Guide for the Aspiring Dropbox Decentralizer \cite{16}. ”  \\
+ The leaves of the tree should be 256-byte shards or smaller. Ideally the tree should be larger than the data, so the tree should be generated on the fly instead of stored. An audit of the data on a remote location simply consists of a particular index and a response consisting of the sub-shard located at that index plus a Merkle tree SPV proof. This algorithm has been further described in Secret
+Sharing and Erasure Coding \cite{16}. ”  \\
 
 
 \subsection{Proof-of-Storage via Pre-generated Audits}
@@ -92,9 +93,9 @@ We generate challenges using 3 different mechanisms: \\
 \subsection{Full Heartbeat}
 We can use our seed and the full shard to generate our hash response. This verifies full shard integrity, but is extremely I/O-inefficient, and leads to long seek times.
 \subsection{Cycle Heartbeat}
-A small improvement is where the shard is split into n discrete pieces, and we verify each piece in order until we complete the cycle. This method was first described in part by Filecoin \cite{11}. This is more I/O-efficient, and allows us to fully verify shard integrity after n heartbeats. Unfortunately, it leaves the system open to potential attacks, as an attacker would still be able to complete heartbeats, with only a data integrity of 1/n.
+A small improvement is where the shard is split into n discrete pieces, and we verify each piece in order until we complete the cycle. This method was first described in part by Filecoin \cite{11}. This is more I/O-efficient, and allows us to fully verify shard integrity after n heartbeats. Unfortunately, it leaves the system open to potential attacks, as an attacker would still be able to complete heartbeats, with only a data integrity of $1/n$.
 \subsection{Deterministic Heartbeat}
-In this method, we deterministically generate reads on a shard using a root seed passed to us by the client. Using Feistel permutations we can verify data after at most n + 2 * sqrt(n) challenges. We add erasure encoding to our heartbeat scheme so that any minor changes to the shard will be detected by the heartbeat, or recovered upon shard retrieval. This is the most efficient method, and by adjusting our parameters we can balance I/O efficiency and file integrity verification.  
+In this method, we deterministically generate reads on a shard using a root seed passed to us by the client. Using Feistel permutations we can verify data after at most$n+2 \sqrt{n}$ challenges. We add erasure encoding to our heartbeat scheme so that any minor changes to the shard will be detected by the heartbeat, or recovered upon shard retrieval. This is the most efficient method, and by adjusting our parameters we can balance I/O efficiency and file integrity verification.  
 \subsection{Mixed Methodology}
 Each method has its own advantages and disadvantages. We propose using a combination of these methods. It is recommended that a full heartbeat is used when the file is first uploaded to the network. Cycle heartbeats should be used periodically over a defined timescale. Deterministic heartbeats should be used for all other challenges. In this way, we can benefit from all the advantages offered by each algorithm. 
 
@@ -243,50 +244,50 @@ $\Pr_{failure}(n,k,p) = \displaystyle \sum_{i=0}^{k-1} p^{k}(1-p)^{n-k }{n \choo
 \begin{table}[hbt!]
 \begin{center}
 \begin{tabular}{llll}
-n=9&  k=3&  p=0.5  & 0.08984375 \\
-n=9&  k=3&  p=0.75 & 0.0013427734375\\
-n=9&  k=3&  p=0.9  & 2.998e-06\\
-n=9&  k=3&  p=0.98 & 4.4481536e-11\\
-n=9&  k=2&  p=0.5  & 0.01953125\\
-n=9&  k=2&  p=0.75 & 0.000106811523438\\
-n=9&  k=2&  p=0.9  & 8.2e-08\\
-n=9&  k=2&  p=0.98 & 2.26304e-13\\
-n=18& k=6&  p=0.5  & 0.0481262207031\\
-n=18& k=6&  p=0.75 & 3.42457205988e-05\\
-n=18& k=6&  p=0.9  & 5.26615912e-10\\
-n=18& k=6&  p=0.98 & 6.39103033491e-19\\
-n=18& k=4&  p=0.5  & 0.00376892089844\\
-n=18& k=4&  p=0.75 & 3.41446138918e-07\\
-n=18& k=4&  p=0.9  & 6.0742e-13\\
-n=18& k=4&  p=0.98 & 2.52627700941e-23\\
-n=36& k=12& p=0.5  & 0.0144083598279\\
-n=36& k=12& p=0.75 & 2.6154613168e-08\\
-n=36& k=12& p=0.9  & 1.97780182001e-17\\
-n=36& k=12& p=0.98 & 1.62829264468e-34\\
-n=36& k=8&  p=0.5  & 0.000156275578775\\
-n=36& k=8&  p=0.75 & 4.18707347677e-12\\
-n=36& k=8&  p=0.9  & 4.09844839229e-23\\
-n=36& k=8&  p=0.98 & 3.90921460941e-43\\
-n=72& k=24& p=0.5  & 0.00147138026506\\
-n=72& k=24& p=0.75 & 1.93774114606e-14\\
-n=72& k=24& p=0.9  & 3.6364801867e-32\\
-n=72& k=24& p=0.98 & 1.39046479388e-65\\
-n=72& k=16& p=0.5  & 3.26998411087e-07\\
-n=72& k=16& p=0.75 & 8.13002111627e-22\\
-n=72& k=16& p=0.9  & 2.44918555677e-43\\
-n=72& k=16& p=0.98 & 1.2363767277e-82\\
+n=9&  k=3&  p=0.5  &  8.984e-02 \\
+n=9&  k=3&  p=0.75 & 1.342e-03\\
+n=9&  k=3&  p=0.9  &  2.998e-06\\
+n=9&  k=3&  p=0.98 & 4.448e-11\\
+n=9&  k=2&  p=0.5  &  1.953e-02\\
+n=9&  k=2&  p=0.75 & 1.068e-04\\
+n=9&  k=2&  p=0.9  &  8.200e-08\\
+n=9&  k=2&  p=0.98 & 2.263e-13\\
+n=18& k=6&  p=0.5  & 4.812e-02\\
+n=18& k=6&  p=0.75 &3.424e-05\\
+n=18& k=6&  p=0.9  & 5.266e-10\\
+n=18& k=6&  p=0.98 &6.391e-19\\
+n=18& k=4&  p=0.5  & 3.768e-03\\
+n=18& k=4&  p=0.75 &3.414e-07\\
+n=18& k=4&  p=0.9  & 6.074e-13\\
+n=18& k=4&  p=0.98 &2.526e-23\\
+n=36& k=12& p=0.5  &0.014e-02\\
+n=36& k=12& p=0.75&2.615e-08\\
+n=36& k=12& p=0.9  &1.977e-17\\
+n=36& k=12& p=0.98&1.628e-34\\
+n=36& k=8&  p=0.5  & 1.562e-04\\
+n=36& k=8&  p=0.75 &4.187e-12\\
+n=36& k=8&  p=0.9  & 4.098e-23\\
+n=36& k=8&  p=0.98 &3.909e-43\\
+n=72& k=24& p=0.5  &1.471e-03\\
+n=72& k=24& p=0.75&1.937e-14\\
+n=72& k=24& p=0.9  &3.636e-32\\
+n=72& k=24& p=0.98&1.390e-65\\
+n=72& k=16& p=0.5  &3.269e-07\\
+n=72& k=16& p=0.75&8.130e-22\\
+n=72& k=16& p=0.9  &2.449e-43\\
+n=72& k=16& p=0.98&1.236e-82\\
 \end{tabular}
 \end{center}
 \end{table}
 
 %code formatting
 Code:
-\begin{enumerate}
-\item def fac(n): return 1 if n==0 else n * fac(n-1)
-\item def choose(n,k): return fac(n) / fac(k) / fac(n-k) 
-\item def prob(n,k,p): return choose(n,k) * p ** k * (1-p) ** (n-k)
-\item def prob\_fail(n,k,p): return sum([prob(n, i, p) for i in range(0, k)])
-\end{enumerate}
+\begin{lstlisting}
+def fac(n): return 1 if n==0 else n * fac(n-1)
+def choose(n,k): return fac(n) / fac(k) / fac(n-k) 
+def prob(n,k,p): return choose(n,k) * p ** k * (1-p) ** (n-k)
+def prob\_fail(n,k,p): return sum([prob(n, i, p) for i in range(0, k)])
+\end{lstlisting}
 Therefore, with sufficient parameters for erasure encoding, in addition to recovery methods described above, the statistical chance of shard or file loss is quite small. 
 
 
