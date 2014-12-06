@@ -70,7 +70,7 @@ Sharing and Erasure Coding \cite{16}. ”  \\
 
 
 \subsection{Proof-of-Storage via Pre-generated Audits}
-We present an alternate method for audits, which requires more overhead but many have some advantages over the previous methods. We do this through a hash challenge, where the client creates a series of seeds (deterministically from a root seed) that can be added to the file and hashed to generate a unique hash answer. We refer to this process as a “heartbeat”. The client generates these hash challenges, builds a Merkle tree \cite{2} and inserts the Merkle root into a Satoshi-style blockchain. It then publishes or gives the Merkle tree, minus the leaves, to the farmer. The client can then periodically issue the seeds to farmers hosting its data, and check if a farmer’s response matches its generated hash answers, by verifying that the hash the farmer responds with is in the Merkle tree. \\
+We present an alternate method for audits, which requires more overhead but may have some advantages over the previous methods. We do this through a hash challenge, where the client creates a series of seeds (deterministically from a root seed) that can be added to the file and hashed to generate a unique hash answer. We refer to this process as a “heartbeat”. The client generates these hash challenges, builds a Merkle tree \cite{2} and inserts the Merkle root into a Satoshi-style blockchain. It then publishes or gives the Merkle tree, minus the leaves, to the farmer. The client can then periodically issue the seeds to farmers hosting its data, and check if a farmer’s response matches its generated hash answers, by verifying that the hash the farmer responds with is in the Merkle tree. \\
 
 %insert Figure 3
 \begin{figure}[hbt]
@@ -243,39 +243,41 @@ $\Pr_{failure}(n,k,p) = \displaystyle \sum_{i=0}^{k-1} p^{k}(1-p)^{n-k }{n \choo
 %code formatting
 \begin{table}[hbt!]
 \begin{center}
-\begin{tabular}{llll}
-n=9&  k=3&  p=0.5  &  8.984e-02 \\
-n=9&  k=3&  p=0.75 & 1.342e-03\\
-n=9&  k=3&  p=0.9  &  2.998e-06\\
-n=9&  k=3&  p=0.98 & 4.448e-11\\
-n=9&  k=2&  p=0.5  &  1.953e-02\\
-n=9&  k=2&  p=0.75 & 1.068e-04\\
-n=9&  k=2&  p=0.9  &  8.200e-08\\
-n=9&  k=2&  p=0.98 & 2.263e-13\\
-n=18& k=6&  p=0.5  & 4.812e-02\\
-n=18& k=6&  p=0.75 &3.424e-05\\
-n=18& k=6&  p=0.9  & 5.266e-10\\
-n=18& k=6&  p=0.98 &6.391e-19\\
-n=18& k=4&  p=0.5  & 3.768e-03\\
-n=18& k=4&  p=0.75 &3.414e-07\\
-n=18& k=4&  p=0.9  & 6.074e-13\\
-n=18& k=4&  p=0.98 &2.526e-23\\
-n=36& k=12& p=0.5  &0.014e-02\\
-n=36& k=12& p=0.75&2.615e-08\\
-n=36& k=12& p=0.9  &1.977e-17\\
-n=36& k=12& p=0.98&1.628e-34\\
-n=36& k=8&  p=0.5  & 1.562e-04\\
-n=36& k=8&  p=0.75 &4.187e-12\\
-n=36& k=8&  p=0.9  & 4.098e-23\\
-n=36& k=8&  p=0.98 &3.909e-43\\
-n=72& k=24& p=0.5  &1.471e-03\\
-n=72& k=24& p=0.75&1.937e-14\\
-n=72& k=24& p=0.9  &3.636e-32\\
-n=72& k=24& p=0.98&1.390e-65\\
-n=72& k=16& p=0.5  &3.269e-07\\
-n=72& k=16& p=0.75&8.130e-22\\
-n=72& k=16& p=0.9  &2.449e-43\\
-n=72& k=16& p=0.98&1.236e-82\\
+\begin{tabular}{r r l r}
+n & k & p & $\Pr_{failure}{n,k,p}$\\
+\hline  9&  3&    0.5  &  8.984e-02 \\
+\hline  9&  3&    0.75& 1.342e-03\\
+\hline  9&  3&    0.9  &  2.998e-06\\
+\hline  9&  3&    0.98& 4.448e-11\\
+\hline  9&  2&    0.5  &  1.953e-02\\
+\hline  9&  2&    0.75& 1.068e-04\\
+\hline  9&  2&    0.9  &  8.200e-08\\
+\hline  9&  2&    0.98& 2.263e-13\\
+\hline  18& 6&   0.5  & 4.812e-02\\
+\hline  18& 6&   0.75&3.424e-05\\
+\hline  18& 6&   0.9  & 5.266e-10\\
+\hline  18& 6&   0.98&6.391e-19\\
+\hline  18& 4&   0.5  & 3.768e-03\\
+\hline  18& 4&   0.75&3.414e-07\\
+\hline  18& 4&   0.9  & 6.074e-13\\
+\hline  18& 4&   0.98&2.526e-23\\
+\hline  36& 12& 0.5  &1.440e-02\\
+\hline  36& 12&  0.75&2.615e-08\\
+\hline  36& 12&  0.9  &1.977e-17\\
+\hline  36& 12&  0.98&1.628e-34\\
+\hline  36&  8&   0.5  & 1.562e-04\\
+\hline  36& 8&   0.75 &4.187e-12\\
+\hline  36& 8&   0.9  & 4.098e-23\\
+\hline  36& 8&   0.98 &3.909e-43\\
+\hline  72& 24& 0.5  &1.471e-03\\
+\hline  72& 24& 0.75&1.937e-14\\
+\hline  72& 24& 0.9  &3.636e-32\\
+\hline  72& 24& 0.98&1.390e-65\\
+\hline  72& 16& 0.5  &3.269e-07\\
+\hline  72& 16& 0.75&8.130e-22\\
+\hline  72& 16& 0.9  &2.449e-43\\
+\hline  72& 16& 0.98&1.236e-82\\
+\hline  
 \end{tabular}
 \end{center}
 \end{table}
