@@ -16,8 +16,11 @@
 \lstset{language=TeX}
 \SetWatermarkScale{8}
 
-\title{\large \bf Storj:  Peer-to-Peer Cloud Storage Network}
-\author{\small Shawn Wilkinson + Vitalik Buterin + Tome Boshevski\\ \small shawn@storj.io + v@buterin.com + tome@storj.io\\ }
+\title{\textbf{Storj: Peer-to-Peer Cloud Storage Network}}
+\author{Shawn Wilkinson (shawn@storj.io)\\
+\\Contributors:\\ 
+Tome Boshevski (tome@storj.io), Josh Brandoff (josh@storj.io),\\ 
+and Vitalik Buterin (v@buterin.com)}
 \maketitle
 \begin{abstract}
 A peer-to-peer cloud storage network implementing end-to-end encryption would allow users to transfer and share data without reliance on a third party data provider. The removal of central controls would eliminate most traditional data failures and outages, as well as significantly increasing security, privacy, and data control. A peer-to-peer network and basic encryption serve as a solution for most problems, but we must offer proper incentivation for users to properly participate in this network. We propose a solution to these additional problems by using a challenge algorithm. In this way we can periodically cryptographically check the integrity and availability of a file, and offer direct rewards to those maintaining the file. In absence of a peer-to-peer network the described methods may be used to allow users to control, migrate, validate their data on 3rd party data providers without the provider having direct access to the data. 
@@ -32,17 +35,17 @@ What is needed is a decentralized cloud storage platform that implements end-to-
 We identify a shard as an encrypted portion of a file that we would like to store on this network. Splitting the file into shards allows for better data security so that no one farmer will have a complete copy as long as the file being stored is above a standardized shard size. We define a farmer as a user that is leasing his or her hard drive space to the network. We define a standardized shard size as a byte multiple such as 8 MB or 32 MB. These are kept at pre-set sizes to dissuade any attempt to determine what is being stored. Sharding also allows large files to be more manageable as they are distributed throughout the network. 
 \\
 %insert Figure 1
-\begin{figure}[h!]
+\begin{figure}[hbt]
 \centering
 \includegraphics[width=\linewidth]{1}
 \caption{Visualizing the Sharding Process}
 \end{figure}
 
-\begin{lstlisting}
-File is split into some standard byte multiple like 32 MB, or multiple smaller files are combined to form a shard. Any extra space is zero filled.
-Each shard is encrypted convergently or with a user defined method such as with an external encryption key.
-The shards may be directly transmitted to the network. Shards may be further modified depending on the file auditing mechanism.
-\end{lstlisting}
+\begin{enumerate}
+\item File is split into some standard byte-multiple like 32 MB, or multiple smaller files are combined to form a shard. Any extra space is zero filled..
+\item Each shard is encrypted convergently or with a user defined method such as with an external encryption key.
+\item The shards may be directly transmitted to the network. Shards may be further modified, depending on the file-auditing mechanism.
+\end{enumerate}
 
 If necessary, multiple shards can be combined together. This is useful in two situations. First, if the client is storing particularly sensitive or important data, it might be useful to combine their shards with other client’s data or garbage data, in order to disguise their own files. As further described, we use verification and auditing methods on the files, but this creates unnecessary overhead to verify a small document, so it might be worth combining many small files together so they can all be verified at once.
 
@@ -54,7 +57,7 @@ If necessary, multiple shards can be combined together. This is useful in two si
 To implement a trustless data storage network, we must provide a method for a client to audit that the data he or she has stored on the network is available and unmodified. We do this through the use of Merkle trees \cite{2} and Merkle proofs. We take a collection of data and generate a Merkle tree as shown in Figure 2:\\
 
 %insert Figure 2
-\begin{figure}[h!]
+\begin{figure}[hbt]
 \centering
 \includegraphics[width=\linewidth]{2}
 \caption{Generating a Data Merkle Tree}
@@ -67,7 +70,7 @@ To implement a trustless data storage network, we must provide a method for a cl
 We present an alternate method for audits, which requires more overhead but many have some advantages over the previous methods. We do this through a hash challenge, where the client creates a series of seeds (deterministically from a root seed) that can be added to the file and hashed to generate a unique hash answer. We refer to this process as a “heartbeat”. The client generates these hash challenges, builds a Merkle tree \cite{2} and inserts the Merkle root into a Satoshi-style blockchain. It then publishes or gives the Merkle tree, minus the leaves, to the farmer. The client can then periodically issue the seeds to farmers hosting its data, and check if a farmer’s response matches its generated hash answers, by verifying that the hash the farmer responds with is in the Merkle tree. \\
 
 %insert Figure 3
-\begin{figure}[h!]
+\begin{figure}[hbt]
 \centering
 \includegraphics[width=\linewidth]{3}
 \caption{Generating a Merkle Root for Some Data}
@@ -78,7 +81,7 @@ The farmer cannot modify or delete the file because he or she will fail the hash
 We generate challenges using 3 different mechanisms: \\
 
 %insert Figure 4
-\begin{figure}[h!]
+\begin{figure}[hbt]
 \centering
 \includegraphics[width=\linewidth]{4}
 \caption{Three Methods of Generating Hash Challenges}
@@ -97,7 +100,7 @@ Each method has its own advantages and disadvantages. We propose using a combina
 Traditional cloud storage companies own or lease servers to store their customers’ files. They use RAID schemes or a multi-datacenter approach to protect the file from physical or network failure. Storj has no central services. File exist in a distributed, virtual, and decentralized network. We can not depend on a farmer to employ the same safety measures against data loss as a traditional cloud storage company. Because of this, we guarantee redundancy by storing chunks using an K-of-M erasure encoding scheme with multiple farmers. More specifically we account for redundancy on the network layer rather than the physical layer. We must also provide a solution to the possibility of farmers simply turning off their computers, thus removing the availability of a chunk from the network. . \\
 
 %insert Figure 5
-\begin{figure}[h!]
+\begin{figure}[hbt]
 \centering
 \includegraphics[width=\linewidth]{5}
 \caption{Visualizing Audits}
@@ -119,7 +122,7 @@ Ultimately the user and application are in control of redundancy through K-of-M 
 For the network to be able to achieve consensus on file location and integrity, we use Satoshi-style blockchains \cite{3}. As the blockchain is a public ledger, it is an excellent tool for retrieving accurate information, and as the ultimate mechanism to resolve disputes and dissuade attacks. To use a basic analogy, it is easy to steal a cookie from a cookie jar in a secluded area, but it is hard to do so when the jar is instead located in the middle of a public square, being observed by thousands of people. By using a blockchain as a distributed data store, we can build off of an established and time-tested distributed consensus mechanism. We do not store any files in the blockchain, but rather file metadata. In essence, we store the file hash, the network locations of the copies of the chunks, and Merkle roots. The specifics and scalability of this method are described in the MetaDisk paper \cite{1}.  \\
 
 %insert Figure 6
-\begin{figure}[h!]
+\begin{figure}[hbt]
 \centering
 \includegraphics[width=\linewidth]{6}
 \caption{Metadata Insertion into a Blockchain}
@@ -131,7 +134,7 @@ Data is inserted into the blockchain via a standard transaction with extra metad
 Increased redundancy allows for some unique features on the Storj network. Because Storj is a decentralized and distributed network, upon addition of a new farmer to the network to host a chunk, we also add another peer to which we can connect to download the chunk. If we set a redundancy of 20x, then we have 20 peers to download the chunk from simultaneously. This is in contrast to the server-client model which relies on fast connections to the nearest data center.\\
 
 %insert Figure 7
-\begin{figure}[h!]
+\begin{figure}[hbt]
 \centering
 \includegraphics[width=\linewidth]{7}
 \caption{Network Topology of a Server Based Network vs. a Peer-to-Peer Network}
@@ -165,7 +168,7 @@ There are many types of traditional attacks that we must address in our proposed
 A “Google Attack” is a coin termed by Bitcoin Core developer Peter Todd, to describe the coordinated attack on the network by a large corporation or entity controlling vast amounts of computing power/storage space. Our research has shown that Google currently stores about 8,000 PB worth of data \cite{15}. We introduce the concept of “user space”, or the collective unused free space on the computers of average consumers. This user space could expand if users began to use Storj as their primary cloud storage platform. Our research shows that figure to be about 250,000 PB \cite{15}. Thus, even if Google suspended all of its services to attack the network, it would not be possible to outperform the resources provided by user space. We make the assertion that collective user space is greater, and will always be larger than that of the centralized cloud computing industry as a whole.
 
 %insert Figure 8
-\begin{figure}[h!]
+\begin{figure}[hbt]
 \centering
 \includegraphics[width=\linewidth]{8}
 \caption{Visualizing Cloud Storage vs. User Space }
@@ -188,12 +191,12 @@ In this attack vector a farmer honestly offers up a large amount of storage spac
 
 \section{Network}
 The steps to upload and retrieve a file to and from the network are:
-\begin{lstlisting}
-Split the file into pieces, add erasure coding and encryption to generate shards.
-Transfer the shards to various farmers on the network, based on distribution and erasure encoding schemes.
-Pay each farmer upon completion of an audit.
-The client may contact any of the farmers for data retrieval, in which case the farmers pay for the transfer of the data.
-\end{lstlisting}
+\begin{enumerate}
+\item Split the file into pieces, add erasure coding and encryption to generate shards.
+\item Transfer the shards to various farmers on the network, based on distribution and erasure encoding schemes.
+\item Pay each farmer upon completion of an audit.
+\item The client may contact any of the farmers for data retrieval, in which case the farmers pay for the transfer of the data.
+\end{enumerate}
 
 \section{Outsourceable Heartbeats}
 Traditional decentralized networks, such as Bitcoin \cite{3}, rely on consensus algorithms in order to function. They more directly use algorithms such as proof-of-work \cite{3}, in which computational power determines network consensus. Unfortunately, these mechanisms require for a majority of the nodes on the network to be honest. This has destroyed smaller cryptocurrencies such as Terracoin \cite{17} and many others, where the majority of the nodes did not behave honestly, known as a 51\% attack. Bitcoin itself has had problems with potential 51\% attacks \cite{18}. Furthermore, these algorithms waste massive amounts of computational power in order to ensure security \cite{19}, although some advancements have been made in cryptocurrencies such as Peercoin \cite{19}.  \\
@@ -220,7 +223,7 @@ GVNs allow us to collate millions of verifications and payments into singular pa
 As we lay out the ideas for Storj, there are several other methods being developed that could handle audits and trustless payments. These include Factom \cite{7}, oracles \cite{21}, smart contracts, Turing-complete blockchains [22], P2P networks, blockchains, quorums \cite{20}, and scratch-off puzzles \cite{23}. Each one of these methods could be a useful and trustless method of handling heartbeats and payments. While MetaDisk \cite{1} will serve as the first implementation of a node in a GVN, these other methods could also serve as nodes in a GVN. Our core goal is to have the client as the ultimate decider. The client can either handle these tasks, or have full power over which algorithms the client feels most comfortable with protecting its data. 
 
 %insert figure 10
-\begin{figure}[h!]
+\begin{figure}[hbt]
 \centering
 \includegraphics[width=\linewidth]{9}
 \caption{Visualizing an Example of GVN}
@@ -235,49 +238,53 @@ $\Pr_{failure}(n,k,p) = \displaystyle \sum_{i=0}^{k-1} p^{k}(1-p)^{n-k }{n \choo
 
 
 %code formatting
-\begin{lstlisting}
-n=9  k=3  p=0.5  : 0.08984375
-n=9  k=3  p=0.75 : 0.0013427734375
-n=9  k=3  p=0.9  : 2.998e-06
-n=9  k=3  p=0.98 : 4.4481536e-11
-n=9  k=2  p=0.5  : 0.01953125
-n=9  k=2  p=0.75 : 0.000106811523438
-n=9  k=2  p=0.9  : 8.2e-08
-n=9  k=2  p=0.98 : 2.26304e-13
-n=18 k=6  p=0.5  : 0.0481262207031
-n=18 k=6  p=0.75 : 3.42457205988e-05
-n=18 k=6  p=0.9  : 5.26615912e-10
-n=18 k=6  p=0.98 : 6.39103033491e-19
-n=18 k=4  p=0.5  : 0.00376892089844
-n=18 k=4  p=0.75 : 3.41446138918e-07
-n=18 k=4  p=0.9  : 6.0742e-13
-n=18 k=4  p=0.98 : 2.52627700941e-23
-n=36 k=12 p=0.5  : 0.0144083598279
-n=36 k=12 p=0.75 : 2.6154613168e-08
-n=36 k=12 p=0.9  : 1.97780182001e-17
-n=36 k=12 p=0.98 : 1.62829264468e-34
-n=36 k=8  p=0.5  : 0.000156275578775
-n=36 k=8  p=0.75 : 4.18707347677e-12
-n=36 k=8  p=0.9  : 4.09844839229e-23
-n=36 k=8  p=0.98 : 3.90921460941e-43
-n=72 k=24 p=0.5  : 0.00147138026506
-n=72 k=24 p=0.75 : 1.93774114606e-14
-n=72 k=24 p=0.9  : 3.6364801867e-32
-n=72 k=24 p=0.98 : 1.39046479388e-65
-n=72 k=16 p=0.5  : 3.26998411087e-07
-n=72 k=16 p=0.75 : 8.13002111627e-22
-n=72 k=16 p=0.9  : 2.44918555677e-43
-n=72 k=16 p=0.98 : 1.2363767277e-82
-\end{lstlisting}
+\begin{table}[hbt!]
+\begin{center}
+\begin{tabular}{llll}
+n=9&  k=3&  p=0.5  & 0.08984375 \\
+n=9&  k=3&  p=0.75 & 0.0013427734375\\
+n=9&  k=3&  p=0.9  & 2.998e-06\\
+n=9&  k=3&  p=0.98 & 4.4481536e-11\\
+n=9&  k=2&  p=0.5  & 0.01953125\\
+n=9&  k=2&  p=0.75 & 0.000106811523438\\
+n=9&  k=2&  p=0.9  & 8.2e-08\\
+n=9&  k=2&  p=0.98 & 2.26304e-13\\
+n=18& k=6&  p=0.5  & 0.0481262207031\\
+n=18& k=6&  p=0.75 & 3.42457205988e-05\\
+n=18& k=6&  p=0.9  & 5.26615912e-10\\
+n=18& k=6&  p=0.98 & 6.39103033491e-19\\
+n=18& k=4&  p=0.5  & 0.00376892089844\\
+n=18& k=4&  p=0.75 & 3.41446138918e-07\\
+n=18& k=4&  p=0.9  & 6.0742e-13\\
+n=18& k=4&  p=0.98 & 2.52627700941e-23\\
+n=36& k=12& p=0.5  & 0.0144083598279\\
+n=36& k=12& p=0.75 & 2.6154613168e-08\\
+n=36& k=12& p=0.9  & 1.97780182001e-17\\
+n=36& k=12& p=0.98 & 1.62829264468e-34\\
+n=36& k=8&  p=0.5  & 0.000156275578775\\
+n=36& k=8&  p=0.75 & 4.18707347677e-12\\
+n=36& k=8&  p=0.9  & 4.09844839229e-23\\
+n=36& k=8&  p=0.98 & 3.90921460941e-43\\
+n=72& k=24& p=0.5  & 0.00147138026506\\
+n=72& k=24& p=0.75 & 1.93774114606e-14\\
+n=72& k=24& p=0.9  & 3.6364801867e-32\\
+n=72& k=24& p=0.98 & 1.39046479388e-65\\
+n=72& k=16& p=0.5  & 3.26998411087e-07\\
+n=72& k=16& p=0.75 & 8.13002111627e-22\\
+n=72& k=16& p=0.9  & 2.44918555677e-43\\
+n=72& k=16& p=0.98 & 1.2363767277e-82\\
+\end{tabular}
+\end{center}
+\end{table}
 
 %code formatting
 Code:
-\begin{lstlisting}
-def fac(n): return 1 if n==0 else n * fac(n-1)
-def choose(n,k): return fac(n) / fac(k) / fac(n-k) 
-def prob(n,k,p): return choose(n,k) * p ** k * (1-p) ** (n-k)
-def prob_fail(n,k,p): return sum([prob(n, i, p) for i in range(0, k)])
-\end{lstlisting}
+\begin{enumerate}
+\item def fac(n): return 1 if n==0 else n * fac(n-1)
+\item def choose(n,k): return fac(n) / fac(k) / fac(n-k) 
+\item def prob(n,k,p): return choose(n,k) * p ** k * (1-p) ** (n-k)
+\item def prob\_fail(n,k,p): return sum([prob(n, i, p) for i in range(0, k)])
+\end{enumerate}
 Therefore, with sufficient parameters for erasure encoding, in addition to recovery methods described above, the statistical chance of shard or file loss is quite small. 
 
 
