@@ -52,6 +52,8 @@ If necessary, multiple shards can be combined together. This is useful in two si
 
 
 \section{Proof-of- Storage}
+
+Another concern is the integrity and availability of a shard stored on the network. A Farmer must be able to prove cryptographically that it has the shard, and has not modified it in any way. We accomplish this via the methods discussed below.
 \subsection{Proof-of-Storage via Merkle Audits}
 
 To implement a trustless data storage network, we must provide a method for a client to audit that the data he or she has stored on the network is available and unmodified. We do this through the use of Merkle trees \cite{2} and Merkle proofs. We take a collection of data and generate a Merkle tree as shown in Figure 2:\\
@@ -232,11 +234,11 @@ As we lay out the ideas for Storj, there are several other methods being develop
 \section{Calculations}
 The chance of failure of k-of-n erasure coding failing assuming probability p every chunk stays online, is calculated as follows:
 
+\vspace{2cm}
 {\centering
 $\Pr_{failure}(n,k,p) = \displaystyle \sum_{i=0}^{k-1} p^{k}(1-p)^{n-k }{n \choose k}$
 \\}
-
-
+\vspace{3cm}
 %code formatting
 \begin{table}[hbt!]
 \begin{center}
