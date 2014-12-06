@@ -65,7 +65,7 @@ To implement a trustless data storage network, we must provide a method for a cl
 \caption{Generating a Data Merkle Tree}
 \end{figure}
 
- The leaves of the tree should be 256-byte shards or smaller. Ideally the tree should be larger than the data, so the tree should be generated on the fly instead of stored. An audit of the data on a remote location simply consists of a particular index and a response consisting of the sub-shard located at that index plus a Merkle tree SPV proof. This algorithm has been further described in “Secret Sharing and Erasure Coding: A Guide for the Aspiring Dropbox Decentralizer\cite{16}. ”  \\
+ The leaves of the tree should be 256-byte shards or smaller. Ideally the tree should be larger than the data, so the tree should be generated on the fly instead of stored. An audit of the data on a remote location simply consists of a particular index and a response consisting of the sub-shard located at that index plus a Merkle tree SPV proof. This algorithm has been further described in “Secret Sharing and Erasure Coding: A Guide for the Aspiring Dropbox Decentralizer \cite{16}. ”  \\
 
 
 \subsection{Proof-of-Storage via Pre-generated Audits}
