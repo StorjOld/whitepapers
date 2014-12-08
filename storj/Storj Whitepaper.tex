@@ -10,7 +10,7 @@
 %\usepackage{draftwatermark}
 %\SetWatermarkLightness{0.97}
 %\DeclareGraphicsExtensions{.pdf,.png,.jpg}
-\begin{document}
+
 \lstset{basicstyle=\ttfamily\footnotesize,breaklines=true}
 \lstset{numbers=left, numberstyle=\tiny, stepnumber=1, numbersep=5pt}
 \lstset{language=TeX}
@@ -21,6 +21,8 @@
 \\Contributors:\\ 
 Tome Boshevski (tome@storj.io), Josh Brandoff (josh@storj.io),\\ 
 and Vitalik Buterin (v@buterin.com)}
+\date {December 7, 2014 \\ v1.00}
+\begin{document}
 \maketitle
 \begin{abstract}
 A peer-to-peer cloud storage network implementing end-to-end encryption would allow users to transfer and share data without reliance on a third party data provider. The removal of central controls would eliminate most traditional data failures and outages, as well as significantly increasing security, privacy, and data control. A peer-to-peer network and basic encryption serve as a solution for most problems, but we must offer proper incentivisation for users to properly participate in this network. We propose a solution to these additional problems by using a challenge algorithm. In this way we can periodically cryptographically check the integrity and availability of a file, and offer direct rewards to those maintaining the file. In absence of a peer-to-peer network the described methods may be used to allow users to control, migrate, validate their data on 3rd party data providers without the provider having direct access to the data. 
