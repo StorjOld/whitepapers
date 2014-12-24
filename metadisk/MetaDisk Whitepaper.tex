@@ -12,8 +12,9 @@
 \lstset{language=TeX}
 
 
-\title{\large \bf MetaDisk:  Blockchain-Based Decentralized File Storage Application}
-\author{\small Shawn Wilkinson + Jim Lowry\\ \small shawn@storj.io + jim@storj.io \\  \small \url{http://storj.io} \\  \small \url{http://metadisk.org}}
+\title{\textbf{MetaDisk\\A Blockchain-Based Decentralized\\File Storage Application}}
+\author{Shawn Wilkinson (shawn@storj.io), Jim Lowry (jim@storj.io)\\ Contributor: Tome Boshevski (tome@storj.io)\\ \small \url{http://storj.io} \\  \small \url{http://metadisk.org}}
+\date {December 23, 2014 \\ v1.01}
 \maketitle
 
 %\section{Abstract}
@@ -148,7 +149,7 @@ This sample metadata, regardless of uploaded file size, takes up about 330 bytes
 
 \subsection{Further Scaling}
 
-This is indeed reasonable for an initial network of files, but not scalable for a network to handle the full capacity of data of the entire “cloud.” We are bottlenecked by a Satoshi style blockchain’s limitation of 7 transactions per second \cite{13}. As system usage increases we can instead transition to a system where the blockchain stores merkle roots, which are the cryptographic summary of all files being stored in a transaction. In this way, we can prove the existence of millions of files with one transaction. In this way we can directly use the security of the Bitcoin and/or Storj blockchains. At time of writing we are exploring Notary Chains \cite{14} and some other solutions. 
+This is indeed reasonable for an initial network of files, but not scalable for a network to handle the full capacity of data of the entire “cloud.” We are bottlenecked by a Satoshi style blockchain’s limitation of 7 transactions per second \cite{13}. As system usage increases we can instead transition to a system where the blockchain stores merkle roots, which are the cryptographic summary of all files being stored in a transaction. In this way, we can prove the existence of millions of files with one transaction. In this way we can directly use the security of the Bitcoin and/or Storj blockchains. At time of writing we are exploring Factom \cite{14} and some other solutions. 
 
 \section{Rewards}
 
