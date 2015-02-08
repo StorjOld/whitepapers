@@ -6,5 +6,5 @@
 # Dependencies:
 # po4a texlive
 
-po4a-gettextize -f latex -m ../Storj\ Whitepaper.tex -M UTF-8 -p storj-whitepaper.pot
+po4a-gettextize -f latex -m ../Storj\ Whitepaper.tex -M UTF-8 -p storj-whitepaper.pot --copyright-holder "Storj Labs" --package-name "Storj Whitepaper" --package-version 1
 
